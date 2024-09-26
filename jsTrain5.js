@@ -2,6 +2,9 @@
 function printIndexes(array) {
   // Проходимося по всіх індексах масиву
   // Виводимо кожен індекс на консоль
+  for (let index in array) {
+    console.log(index);
+  }
 }
 
 console.log("Завдання 1 ====================================");
@@ -19,6 +22,13 @@ function sumArray(array) {
   // Проходимося по всіх індексах масиву
   // Додаємо кожен елемент до загальної суми
   // Повертаємо суму
+  let sum = 0;
+
+  for (let index in array) {
+    sum += array[index];
+  }
+
+  return sum;
 }
 
 console.log("Завдання 2 ====================================");
@@ -30,6 +40,12 @@ function multiplyArray(array) {
   // Проходимося по всіх значеннях масиву
   // Множимо кожен елемент на загальний добуток
   // Повертаємо добуток
+  let product = 1;
+
+  for (let value of array) {
+    product *= value;
+  }
+  return product;
 }
 
 console.log("Завдання 3 ====================================");
@@ -39,6 +55,16 @@ console.log("multiplyArray([1, 2, 3, 4, 5])", multiplyArray([1, 2, 3, 4, 5])); /
 function modifyArray(array) {
   // Видаляємо третій елемент масиву
   // Виводимо масив перетворений в рядок
+
+  // У випадку повного видалиння елементу
+  // array.splice(2, 1);
+  // const result = array.toString();
+  // console.log(result);
+
+  // Видалення з залишенням порожнього місця
+  delete array[2];
+  const result = array.toString();
+  console.log(result);
 }
 
 console.log("Завдання 4 ====================================");
@@ -48,6 +74,9 @@ modifyArray([1, "two", 3, "four", 5]); // Виведе 1,two,,four,5
 function printUppercase(array) {
   // Проходимося по всіх елементах масиву
   // Перетворюємо кожен елемент в верхній регістр та виводимо на консоль
+  for (let upper of array) {
+    console.log(upper.toUpperCase());
+  }
 }
 
 console.log("Завдання 5 ====================================");
@@ -63,6 +92,19 @@ function findMinMax([firstElement, ...restElements]) {
   // Перевіряємо, чи поточний елемент більший за максимальне значення
   // Якщо так, оновлюємо максимальне значення
   // Виводимо мінімальне та максимальне значення
+  let min = firstElement;
+  let max = firstElement;
+
+  for (let element of restElements) {
+    if (element < min) {
+      min = element;
+    }
+    if (element > max) {
+      max = element;
+    }
+  }
+  console.log("Мінімальне значення:", min);
+  console.log("Максимальне значення:", max);
 }
 
 console.log("Завдання 6 ====================================");
@@ -72,6 +114,8 @@ findMinMax([5, 2, 8, 1, 9, 3]); // Виведе Min: 1 Max: 9
 // Перетворіть масив в рядок за допомогою методу toString() та повторіть його 2 рази. Результат виведіть на консоль.
 function printStrings(array) {
   // Перетворюємо масив в рядок і видаляемо пробіли та виводимо його на консоль
+  const result = array.toString().repeat(2);
+  console.log(result);
 }
 
 console.log("Завдання 7 ====================================");
@@ -84,6 +128,10 @@ function concatenateStrings(array, subString) {
   // Використовуємо метод toString() для перетворення масиву в рядок
   //Перевіряємо чи містить рядок підрядок
   // Виводимо результат
+
+  const result = array.toString().includes(subString);
+  console.log(result);
+  return result;
 }
 
 console.log("Завдання 8 ====================================");
@@ -97,6 +145,13 @@ function addTenToEach(array) {
   // Перебираємо масив за допомогою циклу for-in
   // Додаємо до поточного елемента 10 та додаємо результат в новий масив
   // Виводимо результат
+  let result = [];
+
+  for (let index in array) {
+    result[index] = array[index] + 10;
+  }
+
+  console.log(result);
 }
 
 console.log("Завдання 9 ====================================");
@@ -111,6 +166,24 @@ function swapMinMax(array) {
   // Умова else if перевіряє, чи є поточний елемент масиву меншим за поточне мінімальне значення. Якщо це так, оновлюємо min з поточним елементом масиву та minIndex з поточним індексом.
   // Застосовуємо деструктуризацію масиву для обміну місцями мінімального та максимального значення в масиві.
   // Функція повертає масив, в якому мінімальне та максимальне значення обміняні місцями.
+  let max = array[0];
+  let min = array[0];
+
+  let maxIndex = 0;
+  let minIndex = 0;
+
+  for (let i = 1; i < array.length; i++) {
+    if (array[i] > max) {
+      max = array[i];
+      maxIndex = i;
+    } else if (array[i] < min) {
+      min = array[i];
+      minIndex = i;
+    }
+  }
+  [array[maxIndex], array[minIndex]] = [array[minIndex], array[maxIndex]];
+
+  return array;
 }
 
 console.log("Завдання 10 ====================================");
@@ -124,6 +197,14 @@ function getEvenNumbers(arr) {
   // Перевіряємо чи є число парним
   // Якщо так, додаємо його до масиву результату
   // Повертаємо масив результату
+  let result = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 === 0) {
+      result.push(arr[i]);
+    }
+  }
+  return result;
 }
 console.log("Завдання 11 ====================================");
 console.log(getEvenNumbers([1, 2, 3, 4, 5, 6])); // Виведе [2, 4, 6]
@@ -134,6 +215,13 @@ function multiplyByIndex(arr) {
   // Проходимо через кожен елемент вхідного масиву
   // Помножуємо число на його індекс і додаємо до масиву результату
   // Повертаємо масив результату
+  let result = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    result.push(arr[i] * i);
+  }
+
+  return result;
 }
 console.log("Завдання 12 ====================================");
 console.log(multiplyByIndex([1, 2, 3, 4, 5])); // Виведе [0, 2, 6, 12, 20]
@@ -146,6 +234,16 @@ function replaceNumbers(arr) {
   // Якщо число більше за 10, додаємо рядок "Greater than 10" до масиву результату
   // Якщо число менше або дорівнює 10, додаємо рядок "Less than or equal to 10" до масиву результату
   // Повертаємо масив результату
+  let result = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > 10) {
+      result.push("Greater than 10");
+    } else {
+      result.push("Less than or equal to 10");
+    }
+  }
+  return result;
 }
 
 console.log("Завдання 13 ====================================");
